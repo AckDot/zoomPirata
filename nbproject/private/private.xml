@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <file>file:/C:/Users/PC%20MORGANA/Documents/RepositorioGit/Scrum0/src/DataBase/recipes_script.sql</file>
+            <file>file:/C:/Users/PC%20MORGANA/Documents/RepositorioGit/Scrum0/src/Main.java</file>
+            <file>file:/C:/Users/PC%20MORGANA/Documents/RepositorioGit/Scrum0/src/recipesViews/Denis/VentanaDenis.java</file>
+            <file>file:/C:/Users/PC%20MORGANA/Documents/RepositorioGit/Scrum0/src/DataBase/Recipe.java</file>
+            <file>file:/C:/Users/PC%20MORGANA/Documents/RepositorioGit/Scrum0/src/recipesViews/Denis/Controller.java</file>
+            <file>file:/C:/Users/PC%20MORGANA/Documents/RepositorioGit/Scrum0/src/DataBase/DatabaseConnection.java</file>
+=======
+            <file>file:/C:/Users/PC/Desktop/Srum/Scrum0/src/Main.java</file>
+            <file>file:/C:/Users/PC/Desktop/Srum/Scrum0/src/recipesViews/josue/ventanaJosue.java</file>
+            <file>file:/C:/Users/PC/Desktop/Srum/Scrum0/src/recipesViews/IvanPalacios/RecipeGUI.java</file>
+>>>>>>> josue
+=======
+            <file>file:/home/ackdot/NetBeansProjects/CrudRecetas/src/recipesViews/roberto/RecetasGUI.java</file>
+            <file>file:/home/ackdot/NetBeansProjects/CrudRecetas/src/Main.java</file>
+            <file>file:/home/ackdot/NetBeansProjects/CrudRecetas/src/recipesViews/Denis/Controller.java</file>
+>>>>>>> origin/roberto
+        </group>
+    </open-files>
+</project-private>
