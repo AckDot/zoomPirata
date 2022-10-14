@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import Models.DataBaseConnection;
+import Models.UserQuery;
 import Models.User;
 import Views.regUser;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -15,12 +15,12 @@ import java.awt.event.ActionEvent;
  */
 public class ControllerRegUser {
     public regUser interf ;
-    public DataBaseConnection connector ;
+    public UserQuery connector ;
     
     public ControllerRegUser(){
         
         interf = new regUser();
-        connector = new DataBaseConnection();
+        connector = new UserQuery();
         addListeners();
         interf.setVisible(true);
     }

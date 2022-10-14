@@ -5,6 +5,8 @@
 package Controllers;
 
 import Models.DataBaseConnection;
+import Models.User;
+import Models.UserQuery;
 import Views.accUser;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.event.ActionEvent;
@@ -15,10 +17,10 @@ import java.awt.event.ActionEvent;
  */
 public class ControllerAccUser {
     public accUser interf;
-    public DataBaseConnection connection;
+    public UserQuery connection;
     public ControllerAccUser(){
         interf=new accUser();
-        connection=new DataBaseConnection();
+        connection=new UserQuery();
         addListeners();
         interf.setVisible(true);
     }
@@ -29,6 +31,7 @@ public class ControllerAccUser {
             interf.dispose();
         });
         interf.btnSigin.addActionListener((ActionEvent e)->{
+            
             accederUser();
         });
     }
