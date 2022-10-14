@@ -40,11 +40,6 @@ public class DataBaseConnection {
             JOptionPane.showMessageDialog(null, "Usuario exitente" + e); 
         } 
     }
-    
-    public static void main(String[] args) {
-        User u = new User("hola","pedro123","Juan", "Perez");
-        DataBaseConnection db = new DataBaseConnection();
-        db.insertUser(u);
-    }
+   
 }
 
