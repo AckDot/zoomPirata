@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 
 /**
  *
@@ -48,7 +49,9 @@ public class UserQuery {
                         result.getString(2),
                         result.getString(3),
                         result.getString(4),
-                        result.getString(5)
+                        result.getString(5),
+                        result.getString(6),
+                        result.getString(7)
                 );
             }
         } catch (SQLException e) {
@@ -57,4 +60,57 @@ public class UserQuery {
         return user;
     }
 
+    public User update(User u) {
+        String sql = "UPDATE users "
+                   + "Set user_name = ?, password = ?, name = ?, last_name = ?, description = ?, picture = ?"
+                   + "Where id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, u.getUserName());
+            st.setString(2, u.getPassword());
+            st.setString(3, u.getName());
+            st.setString(4, u.getLastName());
+            st.setString(5, u.getDescription());
+            st.setString(6, u.getPicture());
+            st.setInt(7, u.getId());
+            st.execute();
+        } catch (SQLException e) {
+            System.out.println("error " + e);
+        }
+        return getUser(u.getId());
+    }
+
+    private User getUser(int id) {
+        String sql = "select * from users where id = ?";
+        User user = null;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet result = st.executeQuery();
+            while (result.next()) {
+                user = new User(
+                        result.getInt(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getString(4),
+                        result.getString(5),
+                        result.getString(6),
+                        result.getString(7)
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("error " + e);
+        }
+        return user;
+    }
+
+    public static void main(String[] args) {
+        
+        UserQuery uq = new UserQuery();
+        User u = uq.getUser(1);
+        u.setDescription("hoooola");
+        u.setName("Pedro");
+        u.setUserName("estemen");
+        u = uq.update(u);
+    }
 }

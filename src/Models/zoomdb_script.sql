@@ -10,6 +10,8 @@ CREATE TABLE users (
   password VARCHAR(100) NOT NULL,
   name VARCHAR(50)NOT NULL,
   last_name VARCHAR(50) NOT NULL,
+  description VARCHAR(30) DEFAULT "Hey There! I am using FakeZoom",
+  picture VARCHAR(100) DEFAULT "blank-avatar.jpg",
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
