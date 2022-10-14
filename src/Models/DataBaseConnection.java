@@ -3,12 +3,9 @@ package Models;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
-
-
 /**
  * DatabaseConexion
+ * @author  IvanPalacios
  */
 public class DataBaseConnection {
 
@@ -24,24 +21,9 @@ public class DataBaseConnection {
         } catch (SQLException e) {
             System.out.print("error");
         }
-    }    
-    
-    public boolean insertUser(User u){
-        try {
-            String sql = "INSERT INTO user (user_name, password, name, last_name) VALUES (?,?,?,?)";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, u.getUserName());
-            st.setString(2, u.getPassword());
-            st.setString(3, u.getName());
-            st.setString(4, u.getLastName());
-            st.execute();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("SQl Exception: " + e);
-            return false;
-        } 
     }
     
-    
+    public Connection getConnection(){
+        return connection;
+    }    
 }
-
