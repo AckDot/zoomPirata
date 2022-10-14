@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 
 /**
  *
@@ -104,13 +103,4 @@ public class UserQuery {
         return user;
     }
 
-    public static void main(String[] args) {
-        
-        UserQuery uq = new UserQuery();
-        User u = uq.getUser(1);
-        u.setDescription("hoooola");
-        u.setName("Pedro");
-        u.setUserName("estemen");
-        u = uq.update(u);
-    }
 }
