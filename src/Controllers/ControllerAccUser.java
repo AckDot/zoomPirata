@@ -41,6 +41,7 @@ public class ControllerAccUser {
         User user= connection.verifyUser(userName,password);
         if(user==null){
             System.out.println("usuario no encontrado");
+            interf.error.setText("*error el usuario no existe");
         }
         else{
             FlatDarkLaf.setup();

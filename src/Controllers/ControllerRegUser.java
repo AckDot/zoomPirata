@@ -48,6 +48,7 @@ public class ControllerRegUser {
          }
          else {
              System.out.println("userName no valido");
+             interf.error.setText("*username ya existe");
          }
      }
 
