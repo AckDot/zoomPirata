@@ -26,7 +26,7 @@ public class DataBaseConnection {
         }
     }    
     
-    public void insertUser(User u){
+    public boolean insertUser(User u){
         try {
             String sql = "INSERT INTO user (user_name, password, name, last_name) VALUES (?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
@@ -35,11 +35,13 @@ public class DataBaseConnection {
             st.setString(3, u.getName());
             st.setString(4, u.getLastName());
             st.execute();
-            JOptionPane.showMessageDialog(null, "Usuario registrado");
+            return true;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Usuario exitente" + e); 
+            System.out.println("SQl Exception: " + e);
+            return false;
         } 
     }
-   
+    
+    
 }
 
