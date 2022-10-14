@@ -1,13 +1,10 @@
 
 package Controllers;
 
+import Models.User;
 import Views.ApplicationGUI;
-import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  *
@@ -15,35 +12,23 @@ import javax.swing.JPanel;
  */
 public class ApplicationController {
     
-    public static void main(String[] args) {
-        FlatDarkLaf.setup();
-        ApplicationController c = new ApplicationController(1, "Jorge");
-    }
-
     private final ApplicationGUI gui;
-    private final int idUser;
+    private final User user;
     
-    public ApplicationController(int idUser, String nick){
-        this.idUser = idUser;
-        gui = new ApplicationGUI(nick);
+    public ApplicationController(User user){
+        this.user = user;
+        gui = new ApplicationGUI(user.getUserName());
         setActionProfileButton();
         setActionMeetButton();
         gui.setVisible(true);
     }
     
-    public int getIdUser(){
-        return idUser;
-    }
     
     private void setActionProfileButton(){
         gui.getProfileButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel p = new JPanel();
-                JButton b = new JButton("Prueba");
-                p.add(b);
-                p.setPreferredSize(new Dimension(300, 300));
-                gui.setContentPanel(p);
+
             }
         });
     }
@@ -52,11 +37,7 @@ public class ApplicationController {
         gui.getMeetButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel p = new JPanel();
-                JButton b = new JButton("PruebaMeet");
-                p.add(b);
-                p.setPreferredSize(new Dimension(350, 350));
-                gui.setContentPanel(p);
+
             }
         });     
     }
