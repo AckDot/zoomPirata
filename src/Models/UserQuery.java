@@ -79,7 +79,7 @@ public class UserQuery {
         return getUser(u.getId());
     }
 
-    private User getUser(int id) {
+    public User getUser(int id) {
         String sql = "select * from users where id = ?";
         User user = null;
         try {
