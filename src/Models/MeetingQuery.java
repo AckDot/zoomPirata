@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Ivan
+ * @author Ivan Palacios
  */
 public class MeetingQuery {
     
@@ -34,10 +34,10 @@ public class MeetingQuery {
     }
     
     public boolean deleteMeeting(Meeting meet){
-        String sql = "delete  from meetings where id = ?";
+        String sql = "delete from meetings where code = ?";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, meet.getId());
+            st.setString(1, meet.getCode());
             st.execute();
             deleteMeetingsUsers(meet);
         }catch(SQLException e){
@@ -78,7 +78,7 @@ public class MeetingQuery {
     public Meeting getMeet(String code) {
         String sql = "select * from meetings where code like ?";
         Meeting meet = null;
-        UserQuery uq = null; 
+        UserQuery uq = new UserQuery(); 
         try{
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, code);
@@ -95,5 +95,16 @@ public class MeetingQuery {
             System.out.println("error " + e);
         }
         return meet;
+    }
+    
+    public static void main(String[] args) {
+        UserQuery uq = new UserQuery();
+        User u = uq.getUser(9);
+        u.setRol("host");
+        String code = "jalñskdjf";
+        Meeting meet = new Meeting(code, u);
+        MeetingQuery mq = new MeetingQuery();
+        //mq.insertMeeting(meet);
+        mq.deleteMeeting(meet);
     }
 }
