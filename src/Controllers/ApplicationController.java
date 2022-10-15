@@ -37,7 +37,7 @@ public class ApplicationController {
         gui.getMeetButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                  gui.setContentPanel(new PanelMeetController(user).getPanelMeet());
             }
         });     
     }
