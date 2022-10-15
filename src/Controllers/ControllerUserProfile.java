@@ -9,9 +9,7 @@ import Models.UserQuery;
 import Views.UserProfile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *
@@ -24,14 +22,16 @@ public class ControllerUserProfile {
     private String[] images;
     private UserQuery uq;
     private int posImage, idUser;
+    private ApplicationController appCont;
 
-    public ControllerUserProfile(User user) {
+    public ControllerUserProfile(User user, ApplicationController appCont) {
 
         this.user = user;
         this.idUser = user.getId();
         this.posImage = -1;
         this.images = new String[6];
         this.uq = new UserQuery();
+        this.appCont = appCont;
 
         images[0] = "/Views/imagenes/avata1.png";
         images[1] = "/Views/imagenes/avatar2.png";
@@ -93,6 +93,7 @@ public class ControllerUserProfile {
                     if (uq.update(user) != null) {
                         user = uq.update(user);
                         panel.getNorificationLabel().setText("Data updated successfully");
+                        appCont.updateUser(user);
                     } else {
                         panel.getNorificationLabel().setText("Error: data not updated");
                     }

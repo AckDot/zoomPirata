@@ -138,7 +138,6 @@ public class UserProfile extends javax.swing.JPanel {
         add(boxDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 180, 20));
 
         norificationLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        norificationLabel.setForeground(new java.awt.Color(255, 255, 255));
         add(norificationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 350, 20));
     }// </editor-fold>//GEN-END:initComponents
 
