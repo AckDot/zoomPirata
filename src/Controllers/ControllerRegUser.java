@@ -41,8 +41,9 @@ public class ControllerRegUser {
          String name=interf.txtName.getText();
          String lastName=interf.txtLastName.getText();
          User user= new User(userName,password, name, lastName);
+         
          if (connector.insertUser(user)){
-            // FlatDarkLaf.setup();
+            user=connector.verifyUser(userName, password);
             new ApplicationController(user);
             interf.dispose();
          }
