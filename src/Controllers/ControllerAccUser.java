@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controllers;
 
-import Models.DataBaseConnection;
 import Models.User;
 import Models.UserQuery;
 import Views.accUser;
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.event.ActionEvent;
 
 /**
@@ -22,6 +17,7 @@ public class ControllerAccUser {
         interf=new accUser();
         connection=new UserQuery();
         addListeners();
+        interf.setLocationRelativeTo(null);
         interf.setVisible(true);
     }
     
@@ -44,7 +40,6 @@ public class ControllerAccUser {
             interf.error.setText("*error el usuario no existe");
         }
         else{
-            FlatDarkLaf.setup();
             new ApplicationController(user);
             interf.dispose();
         }

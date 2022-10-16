@@ -1,45 +1,69 @@
-
 package Controllers;
 
 import Models.User;
 import Views.ApplicationGUI;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  *
  * @author Jorge
  */
 public class ApplicationController {
-    
+
     private final ApplicationGUI gui;
-    private final User user;
-    
-    public ApplicationController(User user){
+    private User user;
+
+    public ApplicationController(User user) {
         this.user = user;
-        gui = new ApplicationGUI(user.getUserName());
+        gui = new ApplicationGUI(user.getUserName(), user.getPicture());
         setActionProfileButton();
         setActionMeetButton();
+        resizeControl();
         gui.setVisible(true);
     }
-    
-    
-    private void setActionProfileButton(){
-        gui.getProfileButton().addActionListener(new ActionListener() {
+
+    private void setActionProfileButton() {
+        gui.getProfileButton().addActionListener((ActionEvent e) -> {
+            ControllerUserProfile c = new ControllerUserProfile(user, this);
+            gui.setContentPanel(c.getPanel());
+        });
+    }
+
+    private void setActionMeetButton() {
+        gui.getMeetButton().addActionListener((ActionEvent e) -> {
+            JoinMeetController c = new JoinMeetController(this);
+            gui.setContentPanel(c.getPanel());
+        });
+    }
+//<<<<<<< HEAD
+//    
+//    private void setActionMeetButton(){
+//        gui.getMeetButton().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                  gui.setContentPanel(new PanelMeetController(user).getPanelMeet());
+//=======
+
+    private void resizeControl() {
+        gui.addComponentListener(new ComponentAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void componentResized(ComponentEvent componentEvent) {
+                if(gui.getContentPanel().getComponentCount() > 0){
+                    gui.getContentPanel().getComponent(0).setPreferredSize(gui.getContentPanel().getSize());
+                }
 
             }
         });
     }
-    
-    private void setActionMeetButton(){
-        gui.getMeetButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                  gui.setContentPanel(new PanelMeetController(user).getPanelMeet());
-            }
-        });     
+
+    public void updateUser(User user) {
+        this.user = user;
+        gui.updateUserData(user.getUserName(), user.getPicture());
     }
-    
+
 }
+                
+                
+    
