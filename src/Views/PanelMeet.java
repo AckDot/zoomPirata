@@ -42,7 +42,7 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonTimer.setForeground(new java.awt.Color(204, 204, 204));
         buttonTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_timer_white_24dp.png"))); // NOI18N
         buttonTimer.setText("Timer");
-        buttonTimer.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        buttonTimer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         buttonChat.setForeground(new java.awt.Color(204, 204, 204));
         buttonChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_chat_white_24dp.png"))); // NOI18N
@@ -64,6 +64,11 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonNotepad.setForeground(new java.awt.Color(204, 204, 204));
         buttonNotepad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_sticky_note_2_white_24dp.png"))); // NOI18N
         buttonNotepad.setText("Notes");
+        buttonNotepad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonNotepadMouseClicked(evt);
+            }
+        });
 
         buttonPeople.setForeground(new java.awt.Color(255, 255, 255));
         buttonPeople.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_group_white_24dp.png"))); // NOI18N
@@ -111,6 +116,11 @@ public class PanelMeet extends javax.swing.JPanel {
 
         getAccessibleContext().setAccessibleName("PanelMeeting");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonNotepadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNotepadMouseClicked
+        nnote notas = new nnote();
+        notas.setVisible(true);
+    }//GEN-LAST:event_buttonNotepadMouseClicked
     
     public JLabel getbuttonChat(){
         return buttonChat;

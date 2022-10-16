@@ -17,12 +17,12 @@ import java.util.logging.Logger;
  *
  * @author Usuario
  */
-public class blocNotas extends javax.swing.JFrame {
+public class nnote extends javax.swing.JFrame {
 
     /**
      * Creates new form notasSS
      */
-    public blocNotas() {
+    public nnote() {
         initComponents();
     }
 
@@ -46,7 +46,10 @@ public class blocNotas extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Notas rapidas");
+        setAlwaysOnTop(true);
+        setLocation(new java.awt.Point(750, 600));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -120,9 +123,9 @@ public class blocNotas extends javax.swing.JFrame {
                 }
                 read.close();
             }catch(FileNotFoundException ex){
-                Logger.getLogger(blocNotas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(nnote.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(blocNotas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(nnote.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -137,7 +140,7 @@ public class blocNotas extends javax.swing.JFrame {
                 writer.print(jTextArea1.getText());
                 writer.close();
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(blocNotas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(nnote.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -159,21 +162,23 @@ public class blocNotas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(blocNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(nnote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(blocNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(nnote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(blocNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(nnote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(blocNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(nnote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new blocNotas().setVisible(true);
+                new nnote().setVisible(true);
             }
         });
     }
