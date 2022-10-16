@@ -39,10 +39,10 @@ public class ControllerRegUser {
          String userName=interf.txtUsername.getText();
          String password=String.valueOf(interf.fieldPassword.getPassword());
          String name=interf.txtName.getText();
-         String lastName=interf.txtName.getText();
+         String lastName=interf.txtLastName.getText();
          User user= new User(userName,password, name, lastName);
          if (connector.insertUser(user)){
-             FlatDarkLaf.setup();
+            // FlatDarkLaf.setup();
             new ApplicationController(user);
             interf.dispose();
          }
