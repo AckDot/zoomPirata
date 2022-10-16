@@ -37,6 +37,14 @@ public class ApplicationController {
             gui.setContentPanel(c.getPanel());
         });
     }
+//<<<<<<< HEAD
+//    
+//    private void setActionMeetButton(){
+//        gui.getMeetButton().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                  gui.setContentPanel(new PanelMeetController(user).getPanelMeet());
+//=======
 
     private void resizeControl() {
         gui.addComponentListener(new ComponentAdapter() {
@@ -45,6 +53,7 @@ public class ApplicationController {
                 if(gui.getContentPanel().getComponentCount() > 0){
                     gui.getContentPanel().getComponent(0).setPreferredSize(gui.getContentPanel().getSize());
                 }
+
             }
         });
     }
@@ -53,4 +62,8 @@ public class ApplicationController {
         this.user = user;
         gui.updateUserData(user.getUserName(), user.getPicture());
     }
+
 }
+                
+                
+    

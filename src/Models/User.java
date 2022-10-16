@@ -15,7 +15,8 @@ public class User {
                    name,
                    lastName,
                    description,
-                   picture;
+                   picture,
+                   rol;
     
     //constructors 
     public User(String userName, String password, String name, String lastName) {
@@ -44,6 +45,7 @@ public class User {
     public String getLastName()     {return lastName;}
     public String getDescription()  {return description;}
     public String getPicture()      {return picture;}
+    public String getRol()          {return rol;}
     //setters
     public void setId           (int id)          {this.id = id;}
     public void setUserName     (String userName) {this.userName = userName;}
@@ -52,4 +54,5 @@ public class User {
     public void setLastName     (String lastName) {this.lastName = lastName;}
     public void setDescription  (String description){this.description = description;}
     public void setPicture      (String picture)   {this.picture = picture;}
+    public void setRol          (String rol)       {this.rol = rol;}
 }
