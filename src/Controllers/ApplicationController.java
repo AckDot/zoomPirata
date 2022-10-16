@@ -5,6 +5,7 @@ import Views.ApplicationGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.JPanel;
 
 /**
  *
@@ -37,23 +38,18 @@ public class ApplicationController {
             gui.setContentPanel(c.getPanel());
         });
     }
-//<<<<<<< HEAD
-//    
-//    private void setActionMeetButton(){
-//        gui.getMeetButton().addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                  gui.setContentPanel(new PanelMeetController(user).getPanelMeet());
-//=======
+
+    public void setContentPanel(JPanel panel) {
+        gui.setContentPanel(panel);
+    }
 
     private void resizeControl() {
         gui.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent componentEvent) {
-                if(gui.getContentPanel().getComponentCount() > 0){
+                if (gui.getContentPanel().getComponentCount() > 0) {
                     gui.getContentPanel().getComponent(0).setPreferredSize(gui.getContentPanel().getSize());
                 }
-
             }
         });
     }
@@ -63,7 +59,7 @@ public class ApplicationController {
         gui.updateUserData(user.getUserName(), user.getPicture());
     }
 
+    public User getUser() {
+        return user;
+    }
 }
-                
-                
-    
