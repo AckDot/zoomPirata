@@ -97,6 +97,21 @@ public class MeetingQuery {
         return meet;
     }
     
+    public int countUserIntoMeet(Meeting meet){
+        String sql = "select count(id_meeting) from users_meetings where code = ?";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, meet.getCode());
+            ResultSet result = st.executeQuery();
+            while(result.next()){
+                return result.getInt(1);
+            }
+        }catch(SQLException e){
+            System.out.println("erro " +e);
+        }
+        return 0;
+    }
+    
     public static void main(String[] args) {
         UserQuery uq = new UserQuery();
         User u = uq.getUser(9);
