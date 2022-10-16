@@ -17,7 +17,7 @@ public class MeetingQuery {
     
     private final DataBaseConnection CONNECTOR = new DataBaseConnection(); 
     private final Connection connection = CONNECTOR.getConnection();
-    
+    //Crea la reunion creando el atributo de host
     public boolean insertMeeting(Meeting meet) {
         String sql = "insert into meetings (code, id_user) values (?,?)";
         
@@ -32,7 +32,7 @@ public class MeetingQuery {
         }
         return false;
     }
-    
+    //borra la reunion y los usuarios que estan dentro de la reunion
     public boolean deleteMeeting(Meeting meet){
         String sql = "delete from meetings where code = ?";
         try{
@@ -45,7 +45,7 @@ public class MeetingQuery {
         }
         return false;
     }
-    
+    // agrega usuarios a la reunion
     public boolean insertUserMeeting(User u, Meeting meet){
         String sql = "insert into mettings_users (id_user, id_meeting, rol) values (?,?,?)";
         
@@ -57,7 +57,7 @@ public class MeetingQuery {
         }catch(SQLException e){}
         return false;
     }
-    
+    // borrar usuarios de toda la reunion
     private void deleteMeetingsUsers(Meeting meet){
         String sql = "delete from meetings_users where id_meeting = ?";
         try{
@@ -96,7 +96,7 @@ public class MeetingQuery {
         }
         return meet;
     }
-    
+    //Cuenta la cantidad de usuarios que estan dentro de la reunion
     public int countUserIntoMeet(Meeting meet){
         String sql = "select count(id_meeting) from users_meetings where code = ?";
         try{
