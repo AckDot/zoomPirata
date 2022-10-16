@@ -88,9 +88,6 @@
           <Color id="Cursor de Punto de Mira"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonTimerActionEventClickedListener"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="buttonChat">
       <Properties>
@@ -102,9 +99,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Chat"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonChatActionEventClickedListener"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="buttonHand">
       <Properties>
@@ -129,9 +123,6 @@
           <Dimension value="[24, 24]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonHandMouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="display_Timer">
       <Properties>
@@ -154,9 +145,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Notes"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonNotepadMouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="buttonPeople">
       <Properties>
@@ -168,9 +156,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="5 people"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonPeopleMouseClicked"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

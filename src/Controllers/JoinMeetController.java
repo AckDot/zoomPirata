@@ -41,7 +41,9 @@ public class JoinMeetController {
             int option = JOptionPane.showOptionDialog(null, "¿Como desea ingresar a la reunion?", "Ingreso", JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Ingreso normal", "Ingreso anonimo"}, "Ingreso normal");
             if (option == 0) {//Ingreso normal
-
+                    gui.setVisible(false);
+                    //ocultamos el panel de toma de la reuniones y presentamos el panel meeting
+                    
             }
             if (option == 1) {//Ingreso anonimo
 

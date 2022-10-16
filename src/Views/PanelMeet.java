@@ -43,20 +43,10 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_timer_white_24dp.png"))); // NOI18N
         buttonTimer.setText("Timer");
         buttonTimer.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-        buttonTimer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonTimerActionEventClickedListener(evt);
-            }
-        });
 
         buttonChat.setForeground(new java.awt.Color(204, 204, 204));
         buttonChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_chat_white_24dp.png"))); // NOI18N
         buttonChat.setText("Chat");
-        buttonChat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonChatActionEventClickedListener(evt);
-            }
-        });
 
         buttonHand.setBackground(new java.awt.Color(255, 0, 51));
         buttonHand.setForeground(new java.awt.Color(204, 204, 204));
@@ -66,11 +56,6 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonHand.setMaximumSize(new java.awt.Dimension(24, 24));
         buttonHand.setMinimumSize(new java.awt.Dimension(24, 24));
         buttonHand.setPreferredSize(new java.awt.Dimension(24, 24));
-        buttonHand.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonHandMouseClicked(evt);
-            }
-        });
 
         display_Timer.setForeground(new java.awt.Color(255, 255, 255));
         display_Timer.setText("00:00:00");
@@ -79,20 +64,10 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonNotepad.setForeground(new java.awt.Color(204, 204, 204));
         buttonNotepad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_sticky_note_2_white_24dp.png"))); // NOI18N
         buttonNotepad.setText("Notes");
-        buttonNotepad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonNotepadMouseClicked(evt);
-            }
-        });
 
         buttonPeople.setForeground(new java.awt.Color(255, 255, 255));
         buttonPeople.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_group_white_24dp.png"))); // NOI18N
         buttonPeople.setText("5 people");
-        buttonPeople.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonPeopleMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,27 +111,6 @@ public class PanelMeet extends javax.swing.JPanel {
 
         getAccessibleContext().setAccessibleName("PanelMeeting");
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buttonTimerActionEventClickedListener(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTimerActionEventClickedListener
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_buttonTimerActionEventClickedListener
-
-    private void buttonChatActionEventClickedListener(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonChatActionEventClickedListener
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonChatActionEventClickedListener
-
-    private void buttonPeopleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPeopleMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPeopleMouseClicked
-
-    private void buttonNotepadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNotepadMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonNotepadMouseClicked
-
-    private void buttonHandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonHandMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonHandMouseClicked
     
     public JLabel getbuttonChat(){
         return buttonChat;
