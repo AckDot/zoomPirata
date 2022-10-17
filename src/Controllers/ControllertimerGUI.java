@@ -5,10 +5,13 @@
 package Controllers;
 
 import Views.timerGUI;
+import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
+
 
 /**
  *
@@ -17,8 +20,9 @@ import javax.swing.Timer;
 public class ControllertimerGUI {
     timerGUI interf;
     JLabel marcador;
-    String minutes;
-    String hours;
+    int seconds;
+    int  minutes;
+    int hours;
     Timer timer;
     ActionListener accion;
     public ControllertimerGUI(JLabel marcador){
@@ -26,8 +30,6 @@ public class ControllertimerGUI {
         this.marcador=marcador;
         llenado();
         addListeners();
-        minutes="00";
-        hours="00";
         timer = new Timer(1000,null);
         accion=new ActionListener() {
             @Override
@@ -38,26 +40,9 @@ public class ControllertimerGUI {
     }
     
     private void llenado(){
-        String numero;
-        for(int i=0;i<60;i++){
-            
-            if(i<10){
-                numero="0"+String.valueOf(i);
-            }
-            else{
-                numero=String.valueOf(i);
-            }
-            interf.choiceMinute.add(numero);
-        }
-        for (int k=0;k<13;k++){
-            if(k<10){
-                numero="0"+String.valueOf(k);
-            }
-            else{
-                numero=String.valueOf(k);
-            }
-            interf.choiceHour.add(numero);
-        }
+       llenandoItems(60,interf.choiceSecond);
+        llenandoItems(60,interf.choiceMinute);
+        llenandoItems(12,interf.choiceHour);
         
         
     }
@@ -65,29 +50,67 @@ public class ControllertimerGUI {
     private void addListeners() {
 
         interf.iniciar.addActionListener((ActionEvent e) -> {
-           minutes =String.valueOf(interf.choiceMinute.getSelectedIndex());
-           hours =String.valueOf(interf.choiceHour.getSelectedIndex());
-           System.out.println(hours+":"+minutes);
+           seconds =interf.choiceSecond.getSelectedIndex();
+           minutes = interf.choiceMinute.getSelectedIndex();
+           hours = interf.choiceHour.getSelectedIndex();
+           System.out.println(minutes+":"+seconds);
            timer.addActionListener(accion);
            timer.start();
+           interf.setVisible(false );
         });
     }
     
     public void visible(){
         interf.setVisible(true);
+        marcador.setVisible(true);
     }
     private void cronometro(){
-        int min= Integer.parseInt(minutes);
-        int hor= Integer.parseInt(hours);
-        System.out.println(hours+minutes);
-        if(min>0){
-            min--;
-            minutes=String.valueOf(min);            
+        if(seconds==0&&minutes==0&&hours==0){
+            timer.stop();
+            marcador.setVisible(false);
+            JOptionPane.showMessageDialog(null,"se acabo el tiempo");
         }
-        if(hor>0){
-            hor--;
-            hours=String.valueOf(hor);
+        mostrarTiempo();
+        System.out.println(hours+" "+minutes+" "+seconds);
+        if(seconds>0){
+            seconds--;                       
         }
+        else{
+            if(minutes>0){
+                minutes--;
+                seconds=59;
+            }
+            else{
+                if(hours>0){
+                    hours--;
+                    minutes=59;
+                    seconds=59;
+                }
+            }
+        }
+        
+        
+    }
+    private void mostrarTiempo(){
+        String num=numString(hours);
+        num=num+":"+numString(minutes)+":"+numString(seconds);
+        marcador.setText(num);
+    }
+    
+    private void llenandoItems(int num,Choice list){
+        for(int i=0;i<num;i++){
+            list.add(numString(i));
+        }
+    }
+    private String numString(int n){
+        String num;
+        if(n<10){
+            num="0"+String.valueOf(n);
+        }
+        else{
+            num=String.valueOf(n);
+        }
+        return num;
     }
     
 }
