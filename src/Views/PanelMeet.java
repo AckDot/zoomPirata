@@ -4,6 +4,7 @@
  */
 package Views;
 
+import Controllers.ControllertimerGUI;
 import javax.swing.JLabel;
 
 /**
@@ -18,6 +19,7 @@ public class PanelMeet extends javax.swing.JPanel {
     public PanelMeet() {
         initComponents();
         display_Timer.setVisible(false);
+        timer=new ControllertimerGUI(display_Timer);
     }
 
     /**
@@ -43,6 +45,11 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_timer_white_24dp.png"))); // NOI18N
         buttonTimer.setText("Timer");
         buttonTimer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonTimer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonTimerMouseClicked(evt);
+            }
+        });
 
         buttonChat.setForeground(new java.awt.Color(204, 204, 204));
         buttonChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_chat_white_24dp.png"))); // NOI18N
@@ -121,6 +128,11 @@ public class PanelMeet extends javax.swing.JPanel {
         nnote notas = new nnote();
         notas.setVisible(true);
     }//GEN-LAST:event_buttonNotepadMouseClicked
+
+    private void buttonTimerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTimerMouseClicked
+         timer.visible();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTimerMouseClicked
     
     public JLabel getbuttonChat(){
         return buttonChat;
@@ -148,7 +160,7 @@ public class PanelMeet extends javax.swing.JPanel {
     private javax.swing.JLabel buttonTimer;
     private javax.swing.JLabel display_Timer;
     // End of variables declaration//GEN-END:variables
-
+    private ControllertimerGUI timer ;
     public Object getMeetButton() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
