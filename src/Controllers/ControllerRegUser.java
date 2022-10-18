@@ -7,7 +7,6 @@ package Controllers;
 import Models.UserQuery;
 import Models.User;
 import Views.regUser;
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.event.ActionEvent;
 /**
  *

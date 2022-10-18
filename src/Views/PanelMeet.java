@@ -5,6 +5,10 @@
 package Views;
 
 import Controllers.ControllertimerGUI;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 
 /**
@@ -18,8 +22,27 @@ public class PanelMeet extends javax.swing.JPanel {
      */
     public PanelMeet() {
         initComponents();
+        initUsersPanel();
         display_Timer.setVisible(false);
         timer = new ControllertimerGUI(display_Timer, btnClose, btnPlayPause);
+    }
+    
+    private void initUsersPanel(){
+        usersPanel.setLayout(new GridBagLayout());
+    }
+    
+    public void addUsersPanel(String img, String name, int pos){
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = pos;
+        c.anchor = GridBagConstraints.WEST;
+        usersPanel.add(new UserPanel(img, name), c);
+    }
+    
+    public void setMeetCodeLabel(String code){
+        meetCodeLabel.setText("Meet code: " + code);
+        meetCodeLabel.setForeground(Color.WHITE);
+        meetCodeLabel.setFont(new Font("Serif", Font.PLAIN, 18));
     }
 
     /**
@@ -39,8 +62,10 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonPeople = new javax.swing.JLabel();
         btnPlayPause = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
+        meetCodeLabel = new javax.swing.JLabel();
+        usersPanel = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(102, 102, 255));
+        setBackground(new java.awt.Color(0, 51, 102));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         buttonTimer.setForeground(new java.awt.Color(204, 204, 204));
@@ -98,49 +123,72 @@ public class PanelMeet extends javax.swing.JPanel {
             }
         });
 
+        meetCodeLabel.setText("jLabel1");
+
+        usersPanel.setBackground(new java.awt.Color(0, 51, 102));
+
+        javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
+        usersPanel.setLayout(usersPanelLayout);
+        usersPanelLayout.setHorizontalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 125, Short.MAX_VALUE)
+        );
+        usersPanelLayout.setVerticalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(buttonNotepad))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(display_Timer)
                         .addGap(30, 30, 30)
                         .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonTimer)
-                        .addGap(63, 63, 63))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonNotepad)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonPeople)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonChat, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(105, Short.MAX_VALUE))))
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(buttonTimer)
+                .addGap(28, 28, 28)
+                .addComponent(buttonChat, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(meetCodeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPeople)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonTimer)
-                        .addComponent(display_Timer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonChat)
-                    .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonNotepad)
-                    .addComponent(buttonPeople))
-                .addGap(37, 37, 37))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonPeople)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(display_Timer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 440, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonChat)
+                            .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonNotepad)
+                            .addComponent(buttonTimer)
+                            .addComponent(meetCodeLabel))
+                        .addGap(39, 39, 39))))
         );
 
         getAccessibleContext().setAccessibleName("PanelMeeting");
@@ -196,10 +244,12 @@ public class PanelMeet extends javax.swing.JPanel {
     private javax.swing.JLabel buttonPeople;
     private javax.swing.JLabel buttonTimer;
     private javax.swing.JLabel display_Timer;
+    private javax.swing.JLabel meetCodeLabel;
+    private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
-    private ControllertimerGUI timer;
-
-    public Object getMeetButton() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private final ControllertimerGUI timer;
+    
+    public void setUsersCount(String usersCount){
+        buttonPeople.setText(usersCount);
     }
 }

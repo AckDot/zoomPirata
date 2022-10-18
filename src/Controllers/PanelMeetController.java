@@ -5,11 +5,14 @@
 package Controllers;
 
 import Models.Meeting;
+import Models.MeetingQuery;
+import Models.User;
 import Views.PanelMeet;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -29,11 +32,14 @@ public class PanelMeetController {
     private final PanelMeet panel;
     private final Meeting meet;
     private boolean selectHand;
+    private MeetingQuery meetQ;
+    private ArrayList<User> listaUsers;
 
     PanelMeetController(Meeting meet) {
         this.meet = meet;
         panel = new PanelMeet();
         selectHand = false;
+        panel.setMeetCodeLabel(meet.getCode());
         introSound();
         setActionTimerButton();
         setActionChatButton();
@@ -41,123 +47,38 @@ public class PanelMeetController {
         setActionNotesButton();
         setActionHandButton();
         setDisplayTimer("00:00:00");
+        meetQ = new MeetingQuery();
+        listaUsers = meetQ.usersInMeet(meet);
+        panel.setUsersCount(listaUsers.size() + " Users");
+        addUsersMeet();
+        
+    }
+    
+    private void addUsersMeet(){
+        for(int i = 0; i < listaUsers.size(); i++){
+            User u = listaUsers.get(i);
+            if(u.getRol().equals("Anonymous")){
+                panel.addUsersPanel(u.getPicture(), "Anonymous", i);
+            }else{
+                panel.addUsersPanel(u.getPicture(), u.getUserName(), i);
+            } 
+        }  
     }
 
     private void setActionTimerButton() {
-        /*panel.getbuttonTimer().addMouseListener( new MouseListener() {
-            
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        });*/
     }
 
     private void setActionChatButton() {
-        /*panel.getbuttonChat().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        });*/
     }
 
     private void setActionPeopleButton() {
-        /*panel.getbuttonPeople().addMouseListener( new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        });*/
     }
 
     private void setActionNotesButton() {
-        /*panel.getbuttonNotepad().addMouseListener( new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        }); */
     }
 
     private void setActionHandButton() {
@@ -176,11 +97,7 @@ public class PanelMeetController {
                         Clip clip = AudioSystem.getClip();
                         clip.open(audio);
                         clip.start();
-                    } catch (UnsupportedAudioFileException ex) {
-                        Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (LineUnavailableException ex) {
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                         Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {
                         try {
@@ -226,11 +143,7 @@ public class PanelMeetController {
             Clip clip = AudioSystem.getClip();
             clip.open(audio);
             clip.start();
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LineUnavailableException ex) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {

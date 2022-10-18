@@ -17,7 +17,6 @@ public class DataBaseConnection {
                     "jdbc:mysql://aws-sa-east-1.connect.psdb.cloud/zoom?sslMode=VERIFY_IDENTITY",
                     "lige8w55arxwgd7en0i0",
                     "pscale_pw_Q43sgAvYivIPjVQMmHuKF6AFX5QhASpnc3iC3DekhpT");
-            System.out.println("connected");
         } catch (SQLException e) {
             System.out.print("error");
         }
