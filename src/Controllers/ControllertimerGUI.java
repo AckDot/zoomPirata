@@ -8,6 +8,15 @@ import Views.timerGUI;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,13 +47,21 @@ public class ControllertimerGUI {
         btnClose.setVisible(false);
         llenado();
         addListeners();
-        timer = new Timer(1000,null);
         accion=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cronometro();
+                try {
+                    cronometro();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(ControllertimerGUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ControllertimerGUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (LineUnavailableException ex) {
+                    Logger.getLogger(ControllertimerGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
+         timer = new Timer(1000,accion);
         bandera=false;
     }
     
@@ -63,8 +80,6 @@ public class ControllertimerGUI {
             seconds =interf.choiceSecond.getSelectedIndex();
            minutes = interf.choiceMinute.getSelectedIndex();
            hours = interf.choiceHour.getSelectedIndex();
-           
-           timer.addActionListener(accion);
            timer.start();
            interf.setVisible(false );
            btnClose.setVisible(true);
@@ -80,13 +95,18 @@ public class ControllertimerGUI {
         interf.setVisible(true);
         marcador.setVisible(true);
     }
-    private void cronometro(){
+    private void cronometro() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
         if(seconds==0&&minutes==0&&hours==0){
             timer.stop();
             marcador.setVisible(false);
             btnClose.setVisible(false);
             btnPlayPause.setVisible(false);
-            JOptionPane.showMessageDialog(null,"se acabo el tiempo");
+             File file = new File("src/Controllers/sonidos/alarma.wav");
+            AudioInputStream audio = AudioSystem.getAudioInputStream(file);
+            Clip clip=AudioSystem.getClip();
+            clip.open(audio);
+            clip.start();
+            JOptionPane.showMessageDialog(null,"se acabo el tiempo");            
         }
         mostrarTiempo();
         
