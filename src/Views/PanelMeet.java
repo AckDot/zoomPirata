@@ -19,7 +19,7 @@ public class PanelMeet extends javax.swing.JPanel {
     public PanelMeet() {
         initComponents();
         display_Timer.setVisible(false);
-        timer=new ControllertimerGUI(display_Timer,btnClose,btnPlayPause);
+        timer = new ControllertimerGUI(display_Timer, btnClose, btnPlayPause);
     }
 
     /**
@@ -128,11 +128,12 @@ public class PanelMeet extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonTimer)
-                    .addComponent(display_Timer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonTimer)
+                        .addComponent(display_Timer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonChat)
@@ -151,7 +152,7 @@ public class PanelMeet extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonNotepadMouseClicked
 
     private void buttonTimerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTimerMouseClicked
-         timer.visible();
+        timer.visible();
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonTimerMouseClicked
 
@@ -162,23 +163,28 @@ public class PanelMeet extends javax.swing.JPanel {
     private void btnPlayPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayPauseActionPerformed
         timer.playPause();
     }//GEN-LAST:event_btnPlayPauseActionPerformed
-    
-    public JLabel getbuttonChat(){
+
+    public JLabel getbuttonChat() {
         return buttonChat;
     }
-    public JLabel getbuttonHand(){
+
+    public JLabel getbuttonHand() {
         return buttonHand;
     }
-    public JLabel getbuttonPeople(){
+
+    public JLabel getbuttonPeople() {
         return buttonPeople;
     }
-    public JLabel getbuttonNotepad(){
+
+    public JLabel getbuttonNotepad() {
         return buttonNotepad;
     }
-    public JLabel getbuttonTimer(){
+
+    public JLabel getbuttonTimer() {
         return buttonTimer;
     }
-    public JLabel getdisplay_Timer(){
+
+    public JLabel getdisplay_Timer() {
         return display_Timer;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -191,7 +197,8 @@ public class PanelMeet extends javax.swing.JPanel {
     private javax.swing.JLabel buttonTimer;
     private javax.swing.JLabel display_Timer;
     // End of variables declaration//GEN-END:variables
-    private ControllertimerGUI timer ;
+    private ControllertimerGUI timer;
+
     public Object getMeetButton() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

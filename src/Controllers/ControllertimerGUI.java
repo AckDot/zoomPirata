@@ -22,32 +22,33 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-
 /**
  *
  * @author PC
  */
 public class ControllertimerGUI {
+
     timerGUI interf;
     JLabel marcador;
     int seconds;
-    int  minutes;
+    int minutes;
     int hours;
     Timer timer;
     boolean bandera;
     ActionListener accion;
     JButton btnPlayPause;
     JButton btnClose;
-    public ControllertimerGUI(JLabel marcador,JButton playPause,JButton close){
-        interf=new timerGUI();
-        this.marcador=marcador;
-        btnPlayPause=playPause;
-        btnClose=close;
+
+    public ControllertimerGUI(JLabel marcador, JButton playPause, JButton close) {
+        interf = new timerGUI();
+        this.marcador = marcador;
+        btnPlayPause = playPause;
+        btnClose = close;
         btnPlayPause.setVisible(false);
         btnClose.setVisible(false);
         llenado();
         addListeners();
-        accion=new ActionListener() {
+        accion = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -61,33 +62,32 @@ public class ControllertimerGUI {
                 }
             }
         };
-         timer = new Timer(1000,accion);
-        bandera=false;
+        timer = new Timer(1000, accion);
+        bandera = false;
     }
-    
-    private void llenado(){
-       llenandoItems(60,interf.choiceSecond);
-        llenandoItems(60,interf.choiceMinute);
-        llenandoItems(12,interf.choiceHour);
-        
-        
+
+    private void llenado() {
+        llenandoItems(60, interf.choiceSecond);
+        llenandoItems(60, interf.choiceMinute);
+        llenandoItems(12, interf.choiceHour);
+
     }
 
     private void addListeners() {
 
         interf.iniciar.addActionListener((ActionEvent e) -> {
-           
-            seconds =interf.choiceSecond.getSelectedIndex();
-           minutes = interf.choiceMinute.getSelectedIndex();
-           hours = interf.choiceHour.getSelectedIndex();
-           timer.start();
-           interf.setVisible(false );
-           btnClose.setVisible(true);
-           btnPlayPause.setVisible(true);
+
+            seconds = interf.choiceSecond.getSelectedIndex();
+            minutes = interf.choiceMinute.getSelectedIndex();
+            hours = interf.choiceHour.getSelectedIndex();
+            timer.start();
+            interf.setVisible(false);
+            btnClose.setVisible(true);
+            btnPlayPause.setVisible(true);
         });
     }
-    
-    public void visible(){
+
+    public void visible() {
         mostrarTiempo();
         interf.choiceSecond.select(0);
         interf.choiceMinute.select(0);
@@ -95,81 +95,80 @@ public class ControllertimerGUI {
         interf.setVisible(true);
         marcador.setVisible(true);
     }
-    private void cronometro() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-        if(seconds==0&&minutes==0&&hours==0){
+
+    private void cronometro() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        if (seconds == 0 && minutes == 0 && hours == 0) {
             timer.stop();
             marcador.setVisible(false);
             btnClose.setVisible(false);
             btnPlayPause.setVisible(false);
-             File file = new File("src/Controllers/sonidos/alarma.wav");
+            File file = new File("src/Controllers/sonidos/alarma.wav");
             AudioInputStream audio = AudioSystem.getAudioInputStream(file);
-            Clip clip=AudioSystem.getClip();
+            Clip clip = AudioSystem.getClip();
             clip.open(audio);
             clip.start();
-            JOptionPane.showMessageDialog(null,"se acabo el tiempo");            
+            JOptionPane.showMessageDialog(null, "se acabo el tiempo");
         }
         mostrarTiempo();
-        
-        if(seconds>0){
-            seconds--;                       
-        }
-        else{
-            if(minutes>0){
+
+        if (seconds > 0) {
+            seconds--;
+        } else {
+            if (minutes > 0) {
                 minutes--;
-                seconds=59;
-            }
-            else{
-                if(hours>0){
+                seconds = 59;
+            } else {
+                if (hours > 0) {
                     hours--;
-                    minutes=59;
-                    seconds=59;
+                    minutes = 59;
+                    seconds = 59;
                 }
             }
         }
-        
-        
+
     }
-    private void mostrarTiempo(){
-        String num=numString(hours);
-        num=num+":"+numString(minutes)+":"+numString(seconds);
+
+    private void mostrarTiempo() {
+        String num = numString(hours);
+        num = num + ":" + numString(minutes) + ":" + numString(seconds);
         marcador.setText(num);
     }
-    
-    private void llenandoItems(int num,Choice list){
-        for(int i=0;i<num;i++){
+
+    private void llenandoItems(int num, Choice list) {
+        for (int i = 0; i < num; i++) {
             list.add(numString(i));
         }
     }
-    private String numString(int n){
+
+    private String numString(int n) {
         String num;
-        if(n<10){
-            num="0"+String.valueOf(n);
-        }
-        else{
-            num=String.valueOf(n);
+        if (n < 10) {
+            num = "0" + String.valueOf(n);
+        } else {
+            num = String.valueOf(n);
         }
         return num;
     }
-    
-    public void playPause(){
-        
-        if(bandera){
+
+    public void playPause() {
+
+        if (bandera) {
             timer.start();
-            bandera=false;
-        }
-        else{
+            bandera = false;
+        } else {
             timer.stop();
-            bandera=true;
+            bandera = true;
         }
     }
-    public void cerrar(){
-        bandera=false;
+
+    public void cerrar() {
+        bandera = false;
         btnClose.setVisible(false);
         btnPlayPause.setVisible(false);
         timer.stop();
         marcador.setVisible(false);
-        hours=0;
-        seconds=0;
-        minutes=0;
+        hours = 0;
+        seconds = 0;
+        minutes = 0;
     }
 }

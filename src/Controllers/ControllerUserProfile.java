@@ -131,9 +131,7 @@ public class ControllerUserProfile {
         panel.getBoxLastName().setText(user.getLastName());
         panel.getBoxPassword().setText(user.getPassword());
         panel.getBoxDescription().setText(user.getDescription());
-        
-        
-           
+
     }
 
 }
