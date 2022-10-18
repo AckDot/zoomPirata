@@ -8,6 +8,7 @@ import Views.timerGUI;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -24,10 +25,17 @@ public class ControllertimerGUI {
     int  minutes;
     int hours;
     Timer timer;
+    boolean bandera;
     ActionListener accion;
-    public ControllertimerGUI(JLabel marcador){
+    JButton btnPlayPause;
+    JButton btnClose;
+    public ControllertimerGUI(JLabel marcador,JButton playPause,JButton close){
         interf=new timerGUI();
         this.marcador=marcador;
+        btnPlayPause=playPause;
+        btnClose=close;
+        btnPlayPause.setVisible(false);
+        btnClose.setVisible(false);
         llenado();
         addListeners();
         timer = new Timer(1000,null);
@@ -37,6 +45,7 @@ public class ControllertimerGUI {
                 cronometro();
             }
         };
+        bandera=false;
     }
     
     private void llenado(){
@@ -50,17 +59,24 @@ public class ControllertimerGUI {
     private void addListeners() {
 
         interf.iniciar.addActionListener((ActionEvent e) -> {
-           seconds =interf.choiceSecond.getSelectedIndex();
+           
+            seconds =interf.choiceSecond.getSelectedIndex();
            minutes = interf.choiceMinute.getSelectedIndex();
            hours = interf.choiceHour.getSelectedIndex();
-           System.out.println(minutes+":"+seconds);
+           
            timer.addActionListener(accion);
            timer.start();
            interf.setVisible(false );
+           btnClose.setVisible(true);
+           btnPlayPause.setVisible(true);
         });
     }
     
     public void visible(){
+        mostrarTiempo();
+        interf.choiceSecond.select(0);
+        interf.choiceMinute.select(0);
+        interf.choiceHour.select(0);
         interf.setVisible(true);
         marcador.setVisible(true);
     }
@@ -68,10 +84,12 @@ public class ControllertimerGUI {
         if(seconds==0&&minutes==0&&hours==0){
             timer.stop();
             marcador.setVisible(false);
+            btnClose.setVisible(false);
+            btnPlayPause.setVisible(false);
             JOptionPane.showMessageDialog(null,"se acabo el tiempo");
         }
         mostrarTiempo();
-        System.out.println(hours+" "+minutes+" "+seconds);
+        
         if(seconds>0){
             seconds--;                       
         }
@@ -113,4 +131,25 @@ public class ControllertimerGUI {
         return num;
     }
     
+    public void playPause(){
+        
+        if(bandera){
+            timer.start();
+            bandera=false;
+        }
+        else{
+            timer.stop();
+            bandera=true;
+        }
+    }
+    public void cerrar(){
+        bandera=false;
+        btnClose.setVisible(false);
+        btnPlayPause.setVisible(false);
+        timer.stop();
+        marcador.setVisible(false);
+        hours=0;
+        seconds=0;
+        minutes=0;
+    }
 }
