@@ -5,12 +5,11 @@
 package Views;
 
 import Controllers.ControllertimerGUI;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.plaf.IconUIResource;
 
 /**
  *
@@ -23,8 +22,27 @@ public class PanelMeet extends javax.swing.JPanel {
      */
     public PanelMeet() {
         initComponents();
+        initUsersPanel();
         display_Timer.setVisible(false);
         timer = new ControllertimerGUI(display_Timer, btnClose, btnPlayPause);
+    }
+    
+    private void initUsersPanel(){
+        usersPanel.setLayout(new GridBagLayout());
+    }
+    
+    public void addUsersPanel(String img, String name, int pos){
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = pos;
+        c.anchor = GridBagConstraints.WEST;
+        usersPanel.add(new UserPanel(img, name), c);
+    }
+    
+    public void setMeetCodeLabel(String code){
+        meetCodeLabel.setText("Meet code: " + code);
+        meetCodeLabel.setForeground(Color.WHITE);
+        meetCodeLabel.setFont(new Font("Serif", Font.PLAIN, 18));
     }
 
     /**
@@ -37,18 +55,17 @@ public class PanelMeet extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonTimer = new javax.swing.JLabel();
+        buttonChat = new javax.swing.JLabel();
+        buttonHand = new javax.swing.JLabel();
         display_Timer = new javax.swing.JLabel();
+        buttonNotepad = new javax.swing.JLabel();
+        buttonPeople = new javax.swing.JLabel();
         btnPlayPause = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        buttonPeople = new javax.swing.JLabel();
-        buttonNotepad = new javax.swing.JLabel();
-        HangUpButton = new javax.swing.JLabel();
-        buttonHand = new javax.swing.JLabel();
-        buttonChat = new javax.swing.JLabel();
-        MeetingCode = new javax.swing.JTextField();
+        meetCodeLabel = new javax.swing.JLabel();
+        usersPanel = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(102, 102, 102));
+        setBackground(new java.awt.Color(0, 51, 102));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         buttonTimer.setForeground(new java.awt.Color(204, 204, 204));
@@ -61,50 +78,9 @@ public class PanelMeet extends javax.swing.JPanel {
             }
         });
 
-        display_Timer.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        display_Timer.setForeground(new java.awt.Color(255, 255, 255));
-        display_Timer.setText("00:00:00");
-        display_Timer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        btnPlayPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/play_pause.png"))); // NOI18N
-        btnPlayPause.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPlayPause.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPlayPause.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayPauseActionPerformed(evt);
-            }
-        });
-
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/close.png"))); // NOI18N
-        btnClose.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnClose.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
-
-        buttonPeople.setForeground(new java.awt.Color(255, 255, 255));
-        buttonPeople.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_group_white_24dp.png"))); // NOI18N
-        buttonPeople.setText("1");
-
-        buttonNotepad.setForeground(new java.awt.Color(204, 204, 204));
-        buttonNotepad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_sticky_note_2_white_24dp.png"))); // NOI18N
-        buttonNotepad.setText("Notes");
-        buttonNotepad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonNotepadMouseClicked(evt);
-            }
-        });
-
-        HangUpButton.setForeground(new java.awt.Color(204, 204, 204));
-        HangUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_call_end_white_24dp.png"))); // NOI18N
-        HangUpButton.setText("Hang up");
-        HangUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HangUpButtonMouseClicked(evt);
-            }
-        });
+        buttonChat.setForeground(new java.awt.Color(204, 204, 204));
+        buttonChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_chat_white_24dp.png"))); // NOI18N
+        buttonChat.setText("Chat");
 
         buttonHand.setBackground(new java.awt.Color(255, 0, 51));
         buttonHand.setForeground(new java.awt.Color(204, 204, 204));
@@ -115,96 +91,104 @@ public class PanelMeet extends javax.swing.JPanel {
         buttonHand.setMinimumSize(new java.awt.Dimension(24, 24));
         buttonHand.setPreferredSize(new java.awt.Dimension(24, 24));
 
-        buttonChat.setForeground(new java.awt.Color(204, 204, 204));
-        buttonChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_chat_white_24dp.png"))); // NOI18N
-        buttonChat.setText("Chat");
+        display_Timer.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        display_Timer.setForeground(new java.awt.Color(255, 255, 255));
+        display_Timer.setText("00:00:00");
+        display_Timer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLayeredPane1.setLayer(buttonPeople, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(buttonNotepad, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(HangUpButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(buttonHand, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(buttonChat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttonNotepad.setForeground(new java.awt.Color(204, 204, 204));
+        buttonNotepad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_sticky_note_2_white_24dp.png"))); // NOI18N
+        buttonNotepad.setText("Notes");
+        buttonNotepad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonNotepadMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonNotepad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buttonChat, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(buttonPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(HangUpButton)
-                .addContainerGap())
+        buttonPeople.setForeground(new java.awt.Color(255, 255, 255));
+        buttonPeople.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/outline_group_white_24dp.png"))); // NOI18N
+        buttonPeople.setText("5 people");
+
+        btnPlayPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/play_pause.png"))); // NOI18N
+        btnPlayPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayPauseActionPerformed(evt);
+            }
+        });
+
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/imagenes/close.png"))); // NOI18N
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        meetCodeLabel.setText("jLabel1");
+
+        usersPanel.setBackground(new java.awt.Color(0, 51, 102));
+
+        javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
+        usersPanel.setLayout(usersPanelLayout);
+        usersPanelLayout.setHorizontalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 125, Short.MAX_VALUE)
         );
-
-        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {HangUpButton, buttonChat, buttonHand});
-
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(HangUpButton)
-                    .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPeople)
-                    .addComponent(buttonNotepad)
-                    .addComponent(buttonChat))
-                .addContainerGap())
+        usersPanelLayout.setVerticalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jLayeredPane1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {HangUpButton, buttonChat, buttonHand, buttonNotepad, buttonPeople});
-
-        MeetingCode.setEditable(false);
-        MeetingCode.setBackground(new java.awt.Color(102, 102, 102));
-        MeetingCode.setFont(new java.awt.Font("Montserrat SemiBold", 2, 18)); // NOI18N
-        MeetingCode.setForeground(new java.awt.Color(255, 255, 255));
-        MeetingCode.setText("Code:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(buttonNotepad))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(display_Timer)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(buttonTimer)
+                .addGap(28, 28, 28)
+                .addComponent(buttonChat, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(meetCodeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 50, Short.MAX_VALUE)
-                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(display_Timer)
-                                .addGap(30, 30, 30)
-                                .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonTimer)))
-                        .addContainerGap(41, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(MeetingCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(usersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPeople)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonTimer)
-                    .addComponent(display_Timer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addComponent(MeetingCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonPeople)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(display_Timer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 440, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonChat)
+                            .addComponent(buttonHand, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonNotepad)
+                            .addComponent(buttonTimer)
+                            .addComponent(meetCodeLabel))
+                        .addGap(39, 39, 39))))
         );
 
         getAccessibleContext().setAccessibleName("PanelMeeting");
@@ -227,16 +211,6 @@ public class PanelMeet extends javax.swing.JPanel {
     private void btnPlayPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayPauseActionPerformed
         timer.playPause();
     }//GEN-LAST:event_btnPlayPauseActionPerformed
-
-    private void HangUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HangUpButtonMouseClicked
-        try {
-            HangUpButton.setIcon(new ImageIcon(getClass().getResource("/Views/imagenes/call_end_FILL0_wght400_GRAD0_opsz48.png")));  
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(PanelMeet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.setVisible(Boolean.FALSE);
-    }//GEN-LAST:event_HangUpButtonMouseClicked
 
     public JLabel getbuttonChat() {
         return buttonChat;
@@ -261,16 +235,7 @@ public class PanelMeet extends javax.swing.JPanel {
     public JLabel getdisplay_Timer() {
         return display_Timer;
     }
-    public JTextField getMeetingCode(){
-        return MeetingCode;
-    }
-    public JLabel getHangUpButton(){
-        return HangUpButton;
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel HangUpButton;
-    private javax.swing.JTextField MeetingCode;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnPlayPause;
     private javax.swing.JLabel buttonChat;
@@ -279,11 +244,12 @@ public class PanelMeet extends javax.swing.JPanel {
     private javax.swing.JLabel buttonPeople;
     private javax.swing.JLabel buttonTimer;
     private javax.swing.JLabel display_Timer;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel meetCodeLabel;
+    private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
-    private ControllertimerGUI timer;
-
-    public Object getMeetButton() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private final ControllertimerGUI timer;
+    
+    public void setUsersCount(String usersCount){
+        buttonPeople.setText(usersCount);
     }
 }

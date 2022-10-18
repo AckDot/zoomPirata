@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -112,5 +113,31 @@ public class MeetingQuery {
             System.out.println("error " +e);
         }
         return 0;
+    }
+    
+    public ArrayList<User> usersInMeet(Meeting meet){  
+        ArrayList<User> listaUsers = new ArrayList<>();
+        String sql = "select * from (select id_user, rol from meetings_users where id_meeting = ?) uno, users where uno.id_user = id";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, meet.getId());
+            ResultSet result = st.executeQuery();
+            while(result.next()){
+                User u = new User(
+                        result.getInt(3),
+                        result.getString(4),
+                        result.getString(5),
+                        result.getString(6),
+                        result.getString(7),
+                        result.getString(8),
+                        result.getString(9)
+                );
+                u.setRol(result.getString(2));
+                listaUsers.add(u);
+            }
+        }catch(SQLException e){
+            System.out.println("erro " +e);
+        }
+        return listaUsers;
     }
 }
