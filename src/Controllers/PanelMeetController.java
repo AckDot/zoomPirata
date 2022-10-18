@@ -5,6 +5,7 @@
 package Controllers;
 
 import Models.Meeting;
+import Models.MeetingQuery;
 import Views.PanelMeet;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -29,11 +30,14 @@ public class PanelMeetController {
     private final PanelMeet panel;
     private final Meeting meet;
     private boolean selectHand;
+    private int numUsers;
+    private MeetingQuery reunion;
 
-    PanelMeetController(Meeting meet) {
+    PanelMeetController(Meeting meet , int numUsers , MeetingQuery me) {
         this.meet = meet;
         panel = new PanelMeet();
         selectHand = false;
+        this.numUsers = numUsers;
         introSound();
         setActionTimerButton();
         setActionChatButton();
@@ -41,6 +45,8 @@ public class PanelMeetController {
         setActionNotesButton();
         setActionHandButton();
         setDisplayTimer("00:00:00");
+        setMeetingCode();
+        setPeopleCounter();
     }
 
     private void setActionTimerButton() {
@@ -191,33 +197,60 @@ public class PanelMeetController {
                     }
                 }
             }
-
             @Override
             public void mousePressed(MouseEvent e) {
-
+                
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
+                
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
+                
             }
+
         });
     }
 
     private void setDisplayTimer(String text) {
         panel.getdisplay_Timer().setText(text);
     }
+    private void setActionExitCallButton() {
+        panel.getHangUpButton().addMouseListener( new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                reunion.deleteMeeting(meet);
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+            }
 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                
+            }
+        }); 
+    }
+    
     private void introSound() {
         AudioInputStream audio = null;
         try {
@@ -244,6 +277,13 @@ public class PanelMeetController {
 
     JPanel getPanelMeet() {
         return panel;
+    }
+    private void setMeetingCode(){
+        panel.getMeetingCode().setText(this.meet.getCode());
+    }
+    
+    private void setPeopleCounter(){
+        panel.getbuttonPeople().setText((this.numUsers+1)+"");
     }
 
 }

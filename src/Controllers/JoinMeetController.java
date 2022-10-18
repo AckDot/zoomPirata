@@ -44,7 +44,8 @@ public class JoinMeetController {
             while (!meetQuery.insertMeeting(meet)) {
                 meet = new Meeting(codeGenerator.generateCode(), appController.getUser());
             }
-            meetController = new PanelMeetController(meet);
+            int numPeople = this.meetQuery.countUserIntoMeet(meet);
+            meetController = new PanelMeetController(meet , numPeople,meetQuery);
             appController.setContentPanel(meetController.getPanelMeet());
         });
     }
@@ -70,7 +71,8 @@ public class JoinMeetController {
                         //Insertando al user en la reunion en la bd
                         meetQuery.insertUserMeeting(appController.getUser(), meet);
                         //Creando y mostrando la interfaz del meet
-                        meetController = new PanelMeetController(meet);
+                        int numPeople = this.meetQuery.countUserIntoMeet(meet);
+                        meetController = new PanelMeetController(meet,numPeople , meetQuery);
                         appController.setContentPanel(meetController.getPanelMeet());
                     }
                 }
@@ -99,4 +101,5 @@ public class JoinMeetController {
             }
         });
     }
+    
 }
