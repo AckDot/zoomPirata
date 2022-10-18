@@ -100,16 +100,16 @@ public class MeetingQuery {
     }
     //Cuenta la cantidad de usuarios que estan dentro de la reunion
     public int countUserIntoMeet(Meeting meet){
-        String sql = "select count(id_meeting) from users_meetings where code = ?";
+        String sql = "select count(id_meeting) from meetings_users where id_meeting = ?";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, meet.getCode());
+            st.setInt(1, meet.getId());
             ResultSet result = st.executeQuery();
             while(result.next()){
                 return result.getInt(1);
             }
         }catch(SQLException e){
-            System.out.println("erro " +e);
+            System.out.println("error " +e);
         }
         return 0;
     }
