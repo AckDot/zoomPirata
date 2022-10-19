@@ -49,7 +49,7 @@ public class PanelMeetController {
         setDisplayTimer("00:00:00");
         meetQ = new MeetingQuery();
         listaUsers = meetQ.usersInMeet(meet);
-        panel.setUsersCount(listaUsers.size() + " Users");
+        panel.setUsersCount(listaUsers.size() + "/100 Users");
         addUsersMeet();
         
     }

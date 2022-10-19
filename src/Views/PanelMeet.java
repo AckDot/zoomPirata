@@ -250,6 +250,6 @@ public class PanelMeet extends javax.swing.JPanel {
     private final ControllertimerGUI timer;
     
     public void setUsersCount(String usersCount){
-        buttonPeople.setText(usersCount);
+        buttonPeople.setText(usersCount + "/100");
     }
 }
