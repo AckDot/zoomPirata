@@ -15,6 +15,7 @@ public class accUser extends javax.swing.JFrame {
      */
     public accUser() {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 

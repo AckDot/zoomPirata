@@ -8,7 +8,7 @@ import Views.timerGUI;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,11 +102,15 @@ public class ControllertimerGUI {
             marcador.setVisible(false);
             btnClose.setVisible(false);
             btnPlayPause.setVisible(false);
-            File file = new File("src/Controllers/sonidos/alarma.wav");
-            AudioInputStream audio = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
+            BufferedInputStream myStream = new BufferedInputStream(getClass().getResourceAsStream("/Controllers/sonidos/alarma.wav"));
+            try {
+                AudioInputStream audio = AudioSystem.getAudioInputStream(myStream);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audio);
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, "se acabo el tiempo");
         }
         mostrarTiempo();

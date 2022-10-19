@@ -15,6 +15,7 @@ public class regUser extends javax.swing.JFrame {
      */
     public regUser() {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 

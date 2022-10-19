@@ -8,9 +8,11 @@ import Models.Meeting;
 import Models.MeetingQuery;
 import Models.User;
 import Views.PanelMeet;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,6 +24,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,55 +33,44 @@ import javax.swing.JPanel;
 public class PanelMeetController {
 
     private final PanelMeet panel;
-    private final Meeting meet;
     private boolean selectHand;
     private MeetingQuery meetQ;
     private ArrayList<User> listaUsers;
+    private Meeting meet;
 
     PanelMeetController(Meeting meet) {
         this.meet = meet;
         panel = new PanelMeet();
         selectHand = false;
         panel.setMeetCodeLabel(meet.getCode());
-        introSound();
-        setActionTimerButton();
-        setActionChatButton();
-        setActionPeopleButton();
-        setActionNotesButton();
         setActionHandButton();
         setDisplayTimer("00:00:00");
+        reloadUsers();
+        ActionListener usuarios = new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                reloadUsers();
+            }
+        };
+        Timer timer = new Timer(2500, usuarios);
+        timer.start(); 
+    }
+    
+    private void reloadUsers(){
         meetQ = new MeetingQuery();
         listaUsers = meetQ.usersInMeet(meet);
         panel.setUsersCount(listaUsers.size() + "/100 Users");
         addUsersMeet();
-        
     }
-    
-    private void addUsersMeet(){
-        for(int i = 0; i < listaUsers.size(); i++){
+
+    private void addUsersMeet() {
+        for (int i = 0; i < listaUsers.size(); i++) {
             User u = listaUsers.get(i);
-            if(u.getRol().equals("Anonymous")){
+            if (u.getRol().equals("Anonymous")) {
                 panel.addUsersPanel(u.getPicture(), "Anonymous", i);
-            }else{
+            } else {
                 panel.addUsersPanel(u.getPicture(), u.getUserName(), i);
-            } 
-        }  
-    }
-
-    private void setActionTimerButton() {
-
-    }
-
-    private void setActionChatButton() {
-
-    }
-
-    private void setActionPeopleButton() {
-
-    }
-
-    private void setActionNotesButton() {
-
+            }
+        }
     }
 
     private void setActionHandButton() {
@@ -89,22 +81,15 @@ public class PanelMeetController {
                 if (!selectHand) {
                     panel.getbuttonHand().setIcon(new ImageIcon(getClass().getResource("/Views/imagenes/outline_front_hand_white_24dp.png")));
                 } else {
-                    AudioInputStream audio = null;
+                    panel.getbuttonHand().setIcon(new ImageIcon(getClass().getResource("/Views/imagenes/outline_front_hand_black_24dp.png")));
+                    BufferedInputStream myStream = new BufferedInputStream(getClass().getResourceAsStream("/Controllers/sonidos/pedirMano.wav"));
                     try {
-                        panel.getbuttonHand().setIcon(new ImageIcon(getClass().getResource("/Views/imagenes/outline_front_hand_black_24dp.png")));
-                        File file = new File("src/Controllers/sonidos/pedirMano.wav");
-                        audio = AudioSystem.getAudioInputStream(file);
-                        Clip clip = AudioSystem.getClip();
-                        clip.open(audio);
-                        clip.start();
+                        AudioInputStream audio = AudioSystem.getAudioInputStream(myStream);
+                        Clip clip2 = AudioSystem.getClip();
+                        clip2.open(audio);
+                        clip2.start();
                     } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                         Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-                    } finally {
-                        try {
-                            audio.close();
-                        } catch (IOException ex) {
-                            Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
                     }
                 }
             }
@@ -136,26 +121,19 @@ public class PanelMeetController {
     }
 
     private void introSound() {
-        AudioInputStream audio = null;
+        BufferedInputStream myStream = new BufferedInputStream(getClass().getResourceAsStream("/Controllers/sonidos/intro.wav"));
         try {
-            File file = new File("src/Controllers/sonidos/intro.wav");
-            audio = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
+            AudioInputStream audio = AudioSystem.getAudioInputStream(myStream);
+            Clip clip2 = AudioSystem.getClip();
+            clip2.open(audio);
+            clip2.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                audio.close();
-            } catch (IOException ex) {
-                Logger.getLogger(PanelMeetController.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
-
     }
 
     JPanel getPanelMeet() {
+        introSound();
         return panel;
     }
 
